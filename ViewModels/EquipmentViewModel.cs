@@ -123,7 +123,8 @@ namespace MVVMKitchenDemo1.ViewModels
             if(CurrentEquipment != null && CurrentEquipment.EquipmentId == 0 
                 && !string.IsNullOrEmpty(CurrentEquipment.Description) 
                 && !string.IsNullOrEmpty(CurrentEquipment.Condition)
-                && CurrentEquipment.SerialNumber > 0)
+                && CurrentEquipment.SerialNumber > 0
+                && CurrentEquipment.SiteId != 0)
                 return true;
 
             return false;

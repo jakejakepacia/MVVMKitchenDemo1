@@ -71,7 +71,7 @@
     <Compile Include="ViewModels\SiteViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModels\ViewModelCommand.cs" />
+    <Compile Include="Commands\ViewModelCommand.cs" />
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
