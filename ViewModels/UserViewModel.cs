@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using MVVMKitchenDemo1.Models;
-using MVVMKitchenDemo1.Commands;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,18 +15,6 @@ namespace MVVMKitchenDemo1.ViewModels
     public class UserViewModel : ViewModelBase
     {
         UserService ObjUserService;
-        
-        public UserViewModel()
-        {
-            ObjUserService = new UserService();
-            LoadData();
-            CurrentUser = new User();
-            updateCommand = new RelayCommand(Update);
-            deleteCommand = new RelayCommand(Delete);
-        }
-      
-
-        public ICommand BackButtonCommand { get; }
         private string message;
 
         public string Message
@@ -45,6 +32,46 @@ namespace MVVMKitchenDemo1.ViewModels
             set { userList = value; OnPropertyChanged("UserList"); }
         }
 
+        public ICommand UpdateButtonCommand { get; }
+        public ICommand DeleteButtonCommand { get; }
+        public ICommand BackButtonCommand { get; }
+
+
+        public UserViewModel()
+        {
+            ObjUserService = new UserService();
+            LoadData();
+            CurrentUser = new User();
+         
+            UpdateButtonCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteCommand);
+            DeleteButtonCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteCommand);
+        }
+
+        private void ExecuteDeleteCommand(object obj)
+        {
+            Delete();
+        }
+
+        private void ExecuteUpdateCommand(object obj)
+        {
+            Update();
+        }
+
+        private bool CanExecuteCommand(object obj)
+        {
+            if (CurrentUser != null
+                 && !string.IsNullOrEmpty(CurrentUser.FirstName)
+                 && !string.IsNullOrEmpty(CurrentUser.LastName)
+                 && !string.IsNullOrEmpty(CurrentUser.Username)
+                 && !string.IsNullOrEmpty(CurrentUser.Password)
+                 && !string.IsNullOrEmpty(CurrentUser.EmailAddress)
+                 && !string.IsNullOrEmpty(CurrentUser.UserType))
+                return true;
+
+            return false;
+        }
+
+       
         private void LoadData()
         {
             UserList = new ObservableCollection<User>(ObjUserService.GetAll());
@@ -59,18 +86,12 @@ namespace MVVMKitchenDemo1.ViewModels
 
         #region SaveOperation
 
-
+   
 
         #endregion
 
         #region Update Operation
 
-        private RelayCommand updateCommand;
-
-        public RelayCommand UpdateCommand
-        {
-            get { return updateCommand; }
-        }
 
         public void Update()
         {
@@ -92,13 +113,6 @@ namespace MVVMKitchenDemo1.ViewModels
         #endregion
 
         #region Delete Operation
-        private RelayCommand deleteCommand;
-
-        public RelayCommand DeleteCommand
-        {
-            get { return deleteCommand; }
-        }
-
         public void Delete()
         {
             try

@@ -97,10 +97,10 @@ WindowStyle="None">
       
             <Button Name="btnUpdate" Content="Update"
                     Margin="5,8,5,8" Padding="5,5,5,5"
-                    Command="{Binding Path=UpdateCommand}"/>
+                    Command="{Binding Path=UpdateButtonCommand}"/>
             <Button Name="btnDelete" Content="Delete"
                     Margin="5,8,5,8" Padding="5,5,5,5"
-                    Command="{Binding Path=DeleteCommand}"/>
+                    Command="{Binding Path=DeleteButtonCommand}"/>
 
         </StackPanel>
 
