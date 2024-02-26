@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MVVMKitchenDemo1.Views"
              xmlns:viewModel="clr-namespace:MVVMKitchenDemo1.ViewModels"
+                xmlns:ff="clr-namespace:MVVMKitchenDemo1.Helpers"
              mc:Ignorable="d" 
             WindowState="Maximized"
         WindowStyle="None">
@@ -49,10 +50,13 @@
         Grid.Row="1" Grid.Column="1" 
         Margin="5,8,5,8" Padding="5,5,5,5"
         Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Name="txtPassword" 
+        <PasswordBox
+            x:Name="PasswordBox"
+          ff:PasswordBoxAssistant.BindPassword="True"  
+          ff:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Grid.Row="2" Grid.Column="1" 
-        Margin="5,8,5,8" Padding="5,5,5,5"
-        Text="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        Margin="5,8,5,8" Padding="5,5,5,5"/>
+
 
         <StackPanel Orientation="Horizontal"
            Grid.Row="3"

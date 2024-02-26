@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\EquipmentService.cs" />
     <Compile Include="Models\Site.cs" />
