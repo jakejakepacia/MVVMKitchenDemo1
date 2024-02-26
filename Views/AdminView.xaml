@@ -1,0 +1,70 @@
+﻿<Window x:Class="MVVMKitchenDemo1.Views.AdminView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMKitchenDemo1.Views"
+        xmlns:viewModel="clr-namespace:MVVMKitchenDemo1.ViewModels"
+        mc:Ignorable="d"
+        Title="AdminView"
+        WindowState="Maximized"
+        WindowStyle="None">
+
+    <Window.DataContext>
+        <viewModel:AdminViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </Window.Visibility>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding WelcomeText}"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            FontSize="30"
+            HorizontalAlignment="Center" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <Button Content="User"
+                Grid.Column="1"
+                Grid.Row="1"
+                Command="{Binding UserButtonCommand}"
+                IsEnabled="{Binding UserButtonEnable}"
+                HorizontalAlignment="Center" Margin="0,8,0,8" Padding="5,5,5,5" Width="225"/>
+        <Button Content="Site"
+                Grid.Column="1"
+                Grid.Row="2"
+                HorizontalAlignment="Center" 
+                Margin="0,8,0,8" Padding="5,5,5,5" Width="225"
+                Command="{Binding SiteButtonCommand}"/>
+        <Button Content="Equipment"
+            Grid.Column="1"
+            Grid.Row="3"
+            HorizontalAlignment="Center" 
+            Margin="0,8,0,8" Padding="5,5,5,5" Width="225"
+             Command="{Binding EquipmentCommand}"/>
+        <Button Content="Logout"
+                Command="{Binding LogoutCommand}"
+             Grid.Column="1"
+             Grid.Row="4"
+             HorizontalAlignment="Center" 
+             Margin="0,8,0,8" Padding="5,5,5,5" Width="225"/>
+
+    </Grid>
+</Window>

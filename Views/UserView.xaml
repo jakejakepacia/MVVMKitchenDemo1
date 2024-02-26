@@ -1,0 +1,149 @@
+﻿<Window x:Class="MVVMKitchenDemo1.Views.UserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVMKitchenDemo1.Views"
+             xmlns:viewModel="clr-namespace:MVVMKitchenDemo1.ViewModels"
+             mc:Ignorable="d"
+            WindowState="Maximized"
+WindowStyle="None">
+
+    <Window.DataContext>
+        <viewModel:UserViewModel/>
+    </Window.DataContext>
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnBack" Content="Back" Click="btnBack_Click"
+                Grid.Row="0"
+                Grid.Column="0"
+          Margin="5,8,10,51" Padding="5,5,5,5"/>
+        <TextBlock Text="User Maintainance"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   FontSize="30"
+                   HorizontalAlignment="Center" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <TextBlock Text="Id" 
+                   Grid.Row="1"
+                   Grid.Column="0" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <TextBlock Text="First Name" 
+              Grid.Row="2"
+              Grid.Column="0" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <TextBlock Text="Last Name" 
+              Grid.Row="3"
+              Grid.Column="0" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <TextBlock Text="Email Address" 
+              Grid.Row="4"
+              Grid.Column="0" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <TextBlock Text="Username" 
+              Grid.Row="5"
+              Grid.Column="0" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <TextBlock Text="Password" 
+              Grid.Row="6"
+              Grid.Column="0" Margin="5,8,5,8" Padding="5,5,5,5"/>
+        <TextBlock Text="User Type" 
+              Grid.Row="7"
+              Grid.Column="0" Margin="5,8,5,8" Padding="5,5,5,5"/>
+
+        <TextBox Name="txtId" 
+                 IsEnabled="False"
+                 Grid.Row="1" Grid.Column="1" 
+                 Margin="5,8,5,8" Padding="5,5,5,5"
+                 Text="{Binding Path=CurrentUser.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Name="txtFirstName" 
+                 Grid.Row="2" Grid.Column="1" 
+                 Margin="5,8,5,8" Padding="5,5,5,5"
+                 Text="{Binding Path=CurrentUser.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Name="txtLastName" 
+                 Grid.Row="3" Grid.Column="1" 
+                 Margin="5,8,5,8" Padding="5,5,5,5"
+                  Text="{Binding Path=CurrentUser.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Name="txtEmail" 
+                 Grid.Row="4" Grid.Column="1" 
+                 Margin="5,8,5,8" Padding="5,5,5,5"
+                  Text="{Binding Path=CurrentUser.EmailAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Name="txtUsername" 
+                 Grid.Row="5" Grid.Column="1" 
+                 Margin="5,8,5,8" Padding="5,5,5,5"
+                 Text="{Binding Path=CurrentUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Name="txtPassword" 
+                 Grid.Row="6" Grid.Column="1" 
+                 Margin="5,8,5,8" Padding="5,5,5,5"
+                  Text="{Binding Path=CurrentUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Name="txtUserType" 
+                 Grid.Row="7" Grid.Column="1" 
+                 Margin="5,8,5,8" Padding="5,5,5,5"
+                  Text="{Binding Path=CurrentUser.UserType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="8"
+                    Grid.Column="1" Margin="2,0,5,0">
+      
+            <Button Name="btnUpdate" Content="Update"
+                    Margin="5,8,5,8" Padding="5,5,5,5"
+                    Command="{Binding Path=UpdateCommand}"/>
+            <Button Name="btnDelete" Content="Delete"
+                    Margin="5,8,5,8" Padding="5,5,5,5"
+                    Command="{Binding Path=DeleteCommand}"/>
+
+        </StackPanel>
+
+        <TextBlock Name="txtBlkMessage" 
+              Grid.Row="9"
+              Grid.Column="1"
+                   Margin="5,8,5,8" Padding="5,5,5,5"
+                   Text="{Binding Path=Message}"/>
+
+        <DataGrid Name="dgUsers" AutoGenerateColumns="False" 
+                  Grid.Row="10" Grid.Column="1" 
+                  Margin="5,8,5,8" Padding="5,5,5,5"
+                  ItemsSource="{Binding Path=UserList, Mode=TwoWay}"
+                  SelectedItem="{Binding CurrentUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Header="UserId" Width="auto" 
+                    Binding="{Binding Path=UserId, Mode=TwoWay}"/>
+                <DataGridTextColumn
+                    Header="First Name" Width="auto" 
+                     Binding="{Binding Path=FirstName,Mode=TwoWay}"/>
+                <DataGridTextColumn
+                    Header="Last Name" Width="auto" 
+                    Binding="{Binding Path=LastName, Mode=TwoWay}"/>
+                <DataGridTextColumn
+                    Header="Email Address" Width="auto" 
+                    Binding="{Binding Path=EmailAddress, Mode=TwoWay}"/>
+                <DataGridTextColumn
+                    Header="Username" Width="auto" 
+                    Binding="{Binding Path=Username, Mode=TwoWay}"/>
+                <DataGridTextColumn
+                     Header="Password" Width="auto" 
+                    Binding="{Binding Path=Password, Mode=TwoWay}"/>
+                <DataGridTextColumn
+                    Header="User Type" Width="auto" 
+                    Binding="{Binding Path=UserType, Mode=TwoWay}"/>
+            </DataGrid.Columns>
+           
+        </DataGrid>
+
+
+
+
+
+    </Grid>
+</Window>
